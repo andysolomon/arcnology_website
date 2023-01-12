@@ -3,7 +3,7 @@ import Image from 'next/image'
 import NavBarSection from '../components/navbar-section'
 import HeroSection from '../components/hero-section'
 import ListSection from '../components/list-section'
-import FeaturesSection from '../components/features-section'
+import AboutSection from '../components/about-section'
 import ContactSection from '../components/contact-section'
 import SocialProof from '../components/social-proof'
 import PricingTable from '../components/pricing-table'
@@ -29,7 +29,7 @@ export default function Home() {
                 <NavBarSection />
                 <HeroSection />
                 <ListSection />
-                <FeaturesSection />
+                <AboutSection />
                 {/* 
                         <SocialProof />
                     */}

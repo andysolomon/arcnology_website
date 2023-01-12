@@ -32,7 +32,7 @@ const features = [
     },
 ]
 
-export default function FeaturesSection() {
+export default function AboutSection() {
     return (
         <section
             id="about"

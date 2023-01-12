@@ -1,9 +1,11 @@
 import * as React from 'react'
+import Image from 'next/image'
 
 const navigation = [
     { name: 'Home', href: '#' },
     { name: 'Services', href: '#services' },
     { name: 'About', href: '#about' },
+    { name: 'Our Team', href: '#team' },
     { name: 'Contact', href: '#contact' },
 ]
 
@@ -16,7 +18,7 @@ const navigationList: React.FC<INavigationList> = ({ name, href }) => (
     <li className="group relative">
         <a
             href={href}
-            className="ud-menu-scroll mx-8 flex py-2 text-black group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-6 lg:px-0 lg:text-black lg:group-hover:text-dark lg:group-hover:opacity-70"
+            className="ud-menu-scroll mx-8 flex py-2 text-white group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-6 lg:px-0 lg:group-hover:text-dark lg:group-hover:opacity-70"
         >
             {name}
         </a>
@@ -87,10 +89,11 @@ const NavBarSection = () => {
                             href="index.html"
                             className="navbar-logo block w-full py-5"
                         >
-                            <img
-                                src="assets/images/logo/ArcnologyWebLogo.png"
+                            <Image
+                                src="/assets/images/logo/ArcnologyWebLogo.png"
                                 alt="logo"
-                                className="header-logo w-full"
+                                width={500}
+                                height={500}
                             />
                         </a>
                     </div>
