@@ -4,6 +4,13 @@ import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Circles from '../../components/images/circles'
 
+type IHeroProps = {
+    title: string
+    subtitle?: string
+    primaryButton?: React.FC<HTMLButtonElement>
+    secondaryButton?: React.FC<HTMLButtonElement>
+}
+
 const navigation = [
     { name: 'Product', href: '#' },
     { name: 'Features', href: '#' },
@@ -11,7 +18,12 @@ const navigation = [
     { name: 'Company', href: '#' },
 ]
 
-export default function HeroSection() {
+const HeroSection: React.FC<IHeroProps> = ({
+    title,
+    subtitle,
+    primaryButton,
+    secondaryButton,
+}) => {
     const circleOne = <Circles styles={'absolute bottom-0 -left-9 z-[-1]'} />
     const circleTwo = <Circles styles={'absolute -top-6 -right-6 z-[-1]'} />
 
@@ -28,26 +40,18 @@ export default function HeroSection() {
                             data-wow-delay=".2s"
                         >
                             <h1 className="mb-8 text-5xl font-bold leading-snug text-white sm:text-7xl sm:leading-snug md:leading-snug">
-                                Maximize Your Online Potential with Arcnology
+                                {title}
                             </h1>
                             <p className="mx-auto mb-10 max-w-[600px] text-lg text-white sm:text-lg sm:leading-relaxed md:leading-relaxed">
-                                Experience the difference with Arcnology's Web
-                                Development and Design services'
+                                {subtitle}
                             </p>
-                            <div className="flex justify-center pt-8 pb-24">
-                                <button
-                                    type="submit"
-                                    className="inline-flex items-center justify-center rounded bg-primary py-4 px-6 mr-12 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-dark"
-                                >
-                                    Questionaire
-                                </button>
-                                <button
-                                    type="submit"
-                                    className="inline-flex items-center justify-center rounded bg-primary py-4 px-6 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-dark"
-                                >
-                                    Questionaire
-                                </button>
-                            </div>
+
+                            {primaryButton && (
+                                <div className="flex justify-center pt-8 pb-24">
+                                    {primaryButton()}
+                                    {secondaryButton()}
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -55,3 +59,5 @@ export default function HeroSection() {
         </div>
     )
 }
+
+export default HeroSection

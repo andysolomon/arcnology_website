@@ -4,6 +4,7 @@ import {
     GlobeAltIcon,
     ScaleIcon,
 } from '@heroicons/react/24/outline'
+import Link from 'next/link'
 
 const features = [
     {
@@ -69,12 +70,12 @@ export default function AboutSection() {
                                         deliver results that exceed
                                         expectations.
                                     </p>
-                                    <a
-                                        href="javascript:void(0)"
+                                    <Link
+                                        href="/about"
                                         className="inline-flex items-center justify-center rounded bg-primary py-4 px-6 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-90 hover:shadow-lg"
                                     >
                                         Learn More
-                                    </a>
+                                    </Link>
                                 </div>
                                 <div className="text-center">
                                     <div className="relative z-10 inline-block">

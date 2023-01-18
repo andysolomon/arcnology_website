@@ -1,12 +1,12 @@
 import * as React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const navigation = [
-    { name: 'Home', href: '#' },
-    { name: 'Services', href: '#services' },
-    { name: 'About', href: '#about' },
-    { name: 'Our Team', href: '#team' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', href: '/' },
+    { name: 'Services', href: '/#services' },
+    { name: 'About', href: '/#about' },
+    { name: 'Contact', href: '/#contact' },
 ]
 
 type INavigationList = {
@@ -16,12 +16,12 @@ type INavigationList = {
 
 const navigationList: React.FC<INavigationList> = ({ name, href }) => (
     <li className="group relative">
-        <a
+        <Link
             href={href}
             className="ud-menu-scroll mx-8 flex py-2 text-white group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-6 lg:px-0 lg:group-hover:text-dark lg:group-hover:opacity-70"
         >
             {name}
-        </a>
+        </Link>
     </li>
 )
 
@@ -30,12 +30,12 @@ const pagesList: React.FC = () => {
     return (
         <>
             <li className="submenu-item group relative">
-                <a
+                <Link
                     href="javascript:void(0)"
                     className="relative mx-8 flex py-2 text-base text-dark after:absolute after:right-1 after:top-1/2 after:mt-[-2px] after:h-2 after:w-2 after:-translate-y-1/2 after:rotate-45 after:border-b-2 after:border-r-2 after:border-current group-hover:text-primary lg:mr-0 lg:ml-8 lg:inline-flex lg:py-6 lg:pl-0 lg:pr-4 lg:text-black lg:group-hover:text-dark lg:after:right-0 lg:group-hover:opacity-70 xl:ml-12"
                 >
                     Pages
-                </a>
+                </Link>
                 <div className="submenu relative top-full left-0 hidden w-[250px] rounded-sm bg-white p-4 transition-[top] duration-300 group-hover:opacity-100 lg:invisible lg:absolute lg:top-[110%] lg:block lg:opacity-0 lg:shadow-lg lg:group-hover:visible lg:group-hover:top-full">
                     <a
                         href="about.html"

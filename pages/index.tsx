@@ -4,6 +4,7 @@ import NavBarSection from '../components/navbar-section'
 import HeroSection from '../components/hero-section'
 import ListSection from '../components/list-section'
 import AboutSection from '../components/about-section'
+import StorySection from '../components/story-section'
 import ContactSection from '../components/contact-section'
 import SocialProof from '../components/social-proof'
 import PricingTable from '../components/pricing-table'
@@ -27,7 +28,12 @@ export default function Home() {
             </Head>
             <main className={styles.main}>
                 <NavBarSection />
-                <HeroSection />
+                <HeroSection
+                    title={'Maximize Your Online Potential with Arcnology'}
+                    subtitle={
+                        'Experience the difference with Arcnologys Web Development and Design services'
+                    }
+                />
                 <ListSection />
                 <AboutSection />
                 {/* 
@@ -37,12 +43,6 @@ export default function Home() {
                 <ContactSection />
             </main>
             <Footer />
-            <a
-                href="javascript:void(0)"
-                className="back-to-top fixed bottom-8 right-8 left-auto z-[999] hidden h-10 w-10 items-center justify-center rounded-md bg-primary text-white shadow-md transition duration-300 ease-in-out hover:bg-dark"
-            >
-                <span className="mt-[6px] h-3 w-3 rotate-45 border-t border-l border-white"></span>
-            </a>
         </>
     )
 }

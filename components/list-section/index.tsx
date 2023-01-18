@@ -49,10 +49,7 @@ const ListSection = () => {
                             <p className="mb-8 text-body-color lg:mb-11">
                                 We specialize in creating visually stunning
                                 websites that are optimized for performance,
-                                security, and search engine optimization. Our
-                                team of experts will work with you to create a
-                                website that effectively communicates your
-                                brand and message.
+                                security, and search engine optimization.
                             </p>
                             <a
                                 href="javascript:void(0)"
@@ -89,10 +86,8 @@ const ListSection = () => {
                                 Our e-commerce solutions are designed to
                                 increase your online sales and make your
                                 business more profitable. We offer integration
-                                with popular platforms like Shopify,
-                                WooCommerce and Magento. We also offer custom
-                                development solutions to fit the unique needs
-                                of your business.
+                                with popular platforms like Shopify, and
+                                SnipCart.
                             </p>
                             <a
                                 href="javascript:void(0)"
@@ -142,10 +137,7 @@ const ListSection = () => {
                                 than just driving traffic to a website. That's
                                 why we offer a range of digital marketing
                                 services that are specifically tailored to your
-                                business. From search engine optimization and
-                                social media marketing to email marketing and
-                                paid advertising, we have the skills and
-                                expertise to drive your online success.'
+                                business.
                             </p>
                             <a
                                 href="javascript:void(0)"
@@ -182,10 +174,7 @@ const ListSection = () => {
                                 We understand that your website is a vital part
                                 of your business. That's why we offer
                                 maintenance and support services to keep your
-                                website running smoothly. We will make sure
-                                that your website is always up-to-date and
-                                secure, leaving you free to focus on your
-                                business.'
+                                website running smoothly.
                             </p>
                             <a
                                 href="javascript:void(0)"
