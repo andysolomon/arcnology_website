@@ -81,6 +81,53 @@ const pagesList: React.FC = () => {
 
 const NavBarSection = () => {
     return (
+        <header className="bg-gray-900">
+            <nav className="mx-auto max-w-7xl px-6 lg:px-8" aria-label="Top">
+                <div className="flex w-full items-center justify-between border-b border-primary py-6 lg:border-none">
+                    <div className="flex items-center">
+                        <a
+                            href="index.html"
+                            className="navbar-logo block w-full py-5"
+                        >
+                            <Image
+                                src="/assets/images/logo/ArcnologyWebLogo.png"
+                                alt="logo"
+                                className="h-10 w-auto"
+                                width={200}
+                                height={200}
+                            />
+                        </a>
+                        <div className="ml-10 hidden space-x-8 lg:block">
+                            {navigation.map((link: INavigationList) => (
+                                <a
+                                    key={link.name}
+                                    href={link.href}
+                                    className="text-base font-medium text-white hover:text-indigo-50"
+                                >
+                                    {link.name}
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+                <div className="flex flex-wrap justify-center gap-x-6 py-4 lg:hidden">
+                    {navigation.map((link: INavigationList) => (
+                        <a
+                            key={link.name}
+                            href={link.href}
+                            className="text-base font-medium text-white hover:text-indigo-50"
+                        >
+                            {link.name}
+                        </a>
+                    ))}
+                </div>
+            </nav>
+        </header>
+    )
+}
+
+const NavBarSectionOld = () => {
+    return (
         <div className="ud-header absolute top-0 left-0 z-40 flex w-full items-center bg-transparent">
             <div className="container">
                 <div className="relative -mx-4 flex items-center justify-between">

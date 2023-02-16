@@ -3,7 +3,7 @@ module.exports = {
     content: [
         './pages/**/*.{js,ts,jsx,tsx}',
         './components/**/*.{js,ts,jsx,tsx}',
-        './styles/**/*.{css}'
+        './styles/**/*.{css}',
     ],
     theme: {
         screens: {
@@ -38,7 +38,8 @@ module.exports = {
             },
         },
     },
-    plugins: [
-        require('@tailwindcss/typography'),
-    ],
+    variants: {
+        backgroundColor: ['responsive', 'hover', 'focus', 'active'],
+    },
+    plugins: [require('@tailwindcss/typography')],
 }

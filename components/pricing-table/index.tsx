@@ -1,167 +1,338 @@
 import * as React from 'react'
+import axios from 'axios'
+import { CheckIcon } from '@heroicons/react/24/outline'
+
+const features = [
+    'Vitae in pulvinar odio id utobortis in inter.',
+    'Sed sed id viverra viverra augue eget massa.',
+    'Urna, gravida amet, a, integer venenatis.',
+    'Lobortis sed pharetra amet vitae eleifend.',
+    'Ullamcorper blandit a consequat donec elit aoreet.',
+    'Dolor quo assumenda.',
+    'Esse rerum distinctio maiores maiores.',
+    'Eos enim officiis ratione.',
+    'Tempore molestiae aliquid excepturi.',
+    'Perspiciatis eveniet inventore eum et aliquam.',
+]
+
+const hobbyFeatures = [
+    'Pariatur quod similique',
+    'Sapiente libero doloribus',
+    'Vel ipsa esse repudiandae',
+]
+const growthFeatures = [
+    'Quia rem est sed impedit magnam',
+    'Dolorem vero ratione voluptates',
+    'Qui sed ab doloribus voluptatem dolore',
+    'Laborum commodi molestiae id et fugiat',
+    'Nam ut ipsa nesciunt culpa modi dolor',
+]
+const scaleFeatures = [
+    'Pariatur quod similique',
+    'Sapiente libero doloribus',
+    'Vel ipsa esse repudiandae',
+]
+
+const tiers = [
+    {
+        id: 'tier-hobby',
+        name: 'Hobby',
+        href: '#',
+        priceMonthly: 49,
+        description:
+            'Lorem ipsum dolor sit amet consect etur adipisicing elit. Itaque amet indis perferendis.',
+        features: [
+            'Pariatur quod similique',
+            'Sapiente libero doloribus modi nostrum',
+            'Vel ipsa esse repudiandae excepturi',
+            'Itaque cupiditate adipisci quibusdam',
+        ],
+    },
+    {
+        id: 'tier-team',
+        name: 'Team',
+        href: '#',
+        priceMonthly: 79,
+        description:
+            'Lorem ipsum dolor sit amet consect etur adipisicing elit. Itaque amet indis perferendis.',
+        features: [
+            'Pariatur quod similique',
+            'Sapiente libero doloribus modi nostrum',
+            'Vel ipsa esse repudiandae excepturi',
+            'Itaque cupiditate adipisci quibusdam',
+            'Sapiente libero doloribus modi nostrum',
+        ],
+    },
+]
+
+const PricingTiers = () => {
+    return (
+        <div className="mx-auto grid max-w-md grid-cols-1 gap-8 lg:max-w-4xl lg:grid-cols-2 lg:gap-8">
+            {tiers.map((tier) => (
+                <div
+                    key={tier.name}
+                    className="flex flex-col rounded-3xl bg-white shadow-xl ring-1 ring-black/10"
+                >
+                    <div className="p-8 sm:p-10">
+                        <h3
+                            className="text-lg font-semibold leading-8 tracking-tight text-indigo-600"
+                            id={tier.id}
+                        >
+                            {tier.name}
+                        </h3>
+                        <div className="mt-4 flex items-baseline text-5xl font-bold tracking-tight text-gray-900">
+                            ${tier.priceMonthly}
+                            <span className="text-lg font-semibold leading-8 tracking-normal text-gray-500">
+                                /mo
+                            </span>
+                        </div>
+                        <p className="mt-6 text-base leading-7 text-gray-600">
+                            {tier.description}
+                        </p>
+                    </div>
+                    <div className="flex flex-1 flex-col p-2">
+                        <div className="flex flex-1 flex-col justify-between rounded-2xl bg-gray-50 p-6 sm:p-8">
+                            <ul role="list" className="space-y-6">
+                                {tier.features.map((feature, idx) => (
+                                    <li
+                                        key={idx}
+                                        className="flex items-start"
+                                    >
+                                        <div className="flex-shrink-0">
+                                            <CheckIcon
+                                                className="h-6 w-6 text-indigo-600"
+                                                aria-hidden="true"
+                                            />
+                                        </div>
+                                        <p className="ml-3 text-sm leading-6 text-gray-600">
+                                            {feature}
+                                        </p>
+                                    </li>
+                                ))}
+                            </ul>
+                            <div className="mt-8">
+                                <a
+                                    href={tier.href}
+                                    className="inline-block w-full rounded-lg bg-indigo-600 px-4 py-2.5 text-center text-sm font-semibold leading-5 text-white shadow-md hover:bg-indigo-700"
+                                    aria-describedby={tier.id}
+                                >
+                                    Get started today
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    )
+}
+
+type BillingInterval = 'custom' | 'support'
+
+const PricingHeader = () => {
+    return (
+        <div className="px-6 lg:px-8">
+            <div className="text-center">
+                <h2 className="text-xl font-semibold leading-6 text-white">
+                    Pricing
+                </h2>
+                <p className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+                    The right price for you, whoever you are
+                </p>
+                <p className="mx-auto mt-3 max-w-4xl text-xl text-white sm:mt-5 sm:text-2xl">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Velit numquam eligendi quos odit doloribus molestiae
+                    voluptatum.
+                </p>
+            </div>
+        </div>
+    )
+}
+
+type PricingToggleProps = {
+    billingInterval: string
+    setBillingInterval: (x: any) => void
+}
+
+const PricingToggle: React.FC<PricingToggleProps> = ({
+    billingInterval,
+    setBillingInterval,
+}) => {
+    return (
+        <div className="relative mt-12 flex justify-center sm:mt-16 mb-8">
+            <div className="flex rounded-lg bg-blue-800 p-0.5">
+                <button
+                    type="button"
+                    data-name="custom"
+                    onClick={() => setBillingInterval('custom')}
+                    className={`${
+                        billingInterval === 'custom'
+                            ? 'relative whitespace-nowrap rounded-md border-indigo-700 bg-white py-2 px-6 text-sm font-medium text-indigo-700 shadow-sm hover:bg-indigo-50 focus:z-10 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-700'
+                            : 'relative ml-0.5 whitespace-nowrap rounded-md border border-transparent py-2 px-6 text-sm font-medium text-indigo-200 hover:bg-indigo-800 focus:z-10 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-700'
+                    }`}
+                >
+                    Custom
+                </button>
+                <button
+                    onClick={() => setBillingInterval('support')}
+                    data-name="support"
+                    type="button"
+                    className={`${
+                        billingInterval === 'support'
+                            ? 'relative whitespace-nowrap rounded-md border-indigo-700 bg-white py-2 px-6 text-sm font-medium text-indigo-700 shadow-sm hover:bg-indigo-50 focus:z-10 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-700'
+                            : 'relative ml-0.5 whitespace-nowrap rounded-md border border-transparent py-2 px-6 text-sm font-medium text-indigo-200 hover:bg-indigo-800 focus:z-10 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-700'
+                    }`}
+                >
+                    Support
+                </button>
+            </div>
+        </div>
+    )
+}
+const PricingCustomWebsite = () => {
+    return (
+        <>
+            <div className="pb-16 mt-12 xl:flex xl:items-center xl:justify-between">
+                <div>
+                    <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+                        <span className="text-white">
+                            Everything you need for &nbsp;
+                        </span>
+                        <span className="text-blue-800">$99 a month</span>
+                    </h1>
+                    <p className="mt-5 text-xl text-white">
+                        Includes every feature we offer plus unlimited projects
+                        and unlimited users.
+                    </p>
+                </div>
+                <a
+                    href="#"
+                    className="mt-8 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-5 py-3 text-base font-medium text-white hover:bg-indigo-700 sm:mt-10 sm:w-auto xl:mt-0"
+                >
+                    Get started today
+                </a>
+            </div>
+            <div className="border-t border-gray-200 pt-16 xl:grid xl:grid-cols-3 xl:gap-x-8">
+                <div>
+                    <h2 className="text-lg font-semibold text-white">
+                        Everything you need
+                    </h2>
+                    <p className="mt-2 text-3xl font-bold tracking-tight text-white">
+                        All-in-one platform
+                    </p>
+                    <p className="mt-4 text-lg text-white">
+                        Ac euismod vel sit maecenas id pellentesque eu sed
+                        consectetur. Malesuada adipiscing sagittis vel nulla
+                        nec. Urna, sed a lectus elementum blandit et.
+                    </p>
+                </div>
+                <div className="mt-4 sm:mt-8 md:mt-10 md:grid md:grid-cols-2 md:gap-x-8 xl:col-span-2 xl:mt-0">
+                    <ul role="list" className="divide-y divide-gray-200">
+                        {features.slice(0, 5).map((feature, featureIdx) =>
+                            featureIdx === 0 ? (
+                                <li
+                                    key={feature}
+                                    className="flex py-4 md:py-0 md:pb-4"
+                                >
+                                    <CheckIcon
+                                        className="h-6 w-6 flex-shrink-0 text-green-500"
+                                        aria-hidden="true"
+                                    />
+                                    <span className="ml-3 text-base text-white">
+                                        {feature}
+                                    </span>
+                                </li>
+                            ) : (
+                                <li key={feature} className="flex py-4">
+                                    <CheckIcon
+                                        className="h-6 w-6 flex-shrink-0 text-green-500"
+                                        aria-hidden="true"
+                                    />
+                                    <span className="ml-3 text-base text-white">
+                                        {feature}
+                                    </span>
+                                </li>
+                            )
+                        )}
+                    </ul>
+                    <ul
+                        role="list"
+                        className="divide-y divide-gray-200 border-t border-gray-200 md:border-t-0"
+                    >
+                        {features.slice(5).map((feature, featureIdx) =>
+                            featureIdx === 0 ? (
+                                <li
+                                    key={feature}
+                                    className="flex py-4 md:border-t-0 md:py-0 md:pb-4"
+                                >
+                                    <CheckIcon
+                                        className="h-6 w-6 flex-shrink-0 text-green-500"
+                                        aria-hidden="true"
+                                    />
+                                    <span className="ml-3 text-base text-white">
+                                        {feature}
+                                    </span>
+                                </li>
+                            ) : (
+                                <li key={feature} className="flex py-4">
+                                    <CheckIcon
+                                        className="h-6 w-6 flex-shrink-0 text-green-500"
+                                        aria-hidden="true"
+                                    />
+                                    <span className="ml-3 text-base text-white">
+                                        {feature}
+                                    </span>
+                                </li>
+                            )
+                        )}
+                    </ul>
+                </div>
+            </div>
+        </>
+    )
+}
+const PricingSupportWebsite = () => {}
 
 const PricingTable = () => {
+    // Top Level State
+    const [billingInterval, setBillingInterval] =
+        React.useState<BillingInterval>('custom')
+
+    const handleBillingClick = (evt: any) => {
+        const billingName = evt.target.dataset.name
+        if (billingName === 'support') {
+        }
+    }
+    const [features, setFeatures] = React.useState<any>([])
+    React.useEffect(() => {
+        const fetchData = async () => {
+            const result = await axios.get(
+                'http://localhost:1337/api/pricing-tiers'
+            )
+            console.log("Result :: ", result.data.data)
+        }
+
+        try{
+            fetchData()
+        } catch {
+            console.log('Wow')
+        }
+
+    }, [])
+
     return (
-        <section
-            id="pricing"
-            className="relative z-20 overflow-hidden bg-white pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]"
-        >
+        <section className="bg-gray-900 py-16 sm:py-24">
             <div className="container">
-                <div className="-mx-4 flex flex-wrap">
-                    <div className="w-full px-4">
-                        <div className="mx-auto mb-[60px] max-w-[620px] text-center lg:mb-20">
-                            <span className="mb-2 block text-lg font-semibold text-primary">
-                                Pricing Table
-                            </span>
-                            <h2 className="mb-4 text-3xl font-bold text-dark sm:text-4xl md:text-[40px]">
-                                Our Pricing Plan
-                            </h2>
-                            <p className="text-lg leading-relaxed text-body-color sm:text-xl sm:leading-relaxed">
-                                There are many variations of passages of Lorem
-                                Ipsum available but the majority have suffered
-                                alteration in some form.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="flex flex-wrap items-center justify-center">
-                    <div className="w-full md:w-1/2 lg:w-1/3">
-                        <div
-                            className="wow fadeInUp relative z-10 mb-10 overflow-hidden rounded-xl border border-primary border-opacity-20 bg-white py-10 px-8 text-center shadow-pricing sm:p-12 lg:py-10 lg:px-6 xl:p-12"
-                            data-wow-delay=".15s
-              "
-                        >
-                            <span className="mb-2 block text-base font-medium uppercase text-dark">
-                                STARTING FROM
-                            </span>
-                            <h2 className="mb-9 text-[28px] font-semibold text-primary">
-                                $ 19.99/mo
-                            </h2>
-
-                            <div className="mb-10">
-                                <p className="mb-1 text-base font-medium leading-loose text-body-color">
-                                    1 User
-                                </p>
-                                <p className="mb-1 text-base font-medium leading-loose text-body-color">
-                                    All UI components
-                                </p>
-                                <p className="mb-1 text-base font-medium leading-loose text-body-color">
-                                    Lifetime access
-                                </p>
-                                <p className="mb-1 text-base font-medium leading-loose text-body-color">
-                                    Free updates
-                                </p>
-                                <p className="mb-1 text-base font-medium leading-loose text-body-color">
-                                    Use on 1 (one) project
-                                </p>
-                                <p className="mb-1 text-base font-medium leading-loose text-body-color">
-                                    3 Months support
-                                </p>
-                            </div>
-                            <div className="w-full">
-                                <a
-                                    href="javascript:void(0)"
-                                    className="inline-block rounded-full border border-[#D4DEFF] bg-transparent py-4 px-11 text-center text-base font-medium text-primary transition duration-300 ease-in-out hover:border-primary hover:bg-primary hover:text-white"
-                                >
-                                    Purchase Now
-                                </a>
-                            </div>
-                            <span className="absolute left-0 bottom-0 z-[-1] block h-14 w-14 rounded-tr-full bg-primary"></span>
-                        </div>
-                    </div>
-                    <div className="w-full md:w-1/2 lg:w-1/3">
-                        <div
-                            className="wow fadeInUp relative z-10 mb-10 overflow-hidden rounded-xl bg-primary bg-gradient-to-b from-primary to-[#179BEE] py-10 px-8 text-center shadow-pricing sm:p-12 lg:py-10 lg:px-6 xl:p-12"
-                            data-wow-delay=".1s
-              "
-                        >
-                            <span className="mb-5 inline-block rounded-full border border-white bg-white py-2 px-6 text-base font-semibold uppercase text-primary">
-                                POPULAR
-                            </span>
-                            <span className="mb-2 block text-base font-medium uppercase text-white">
-                                STARTING FROM
-                            </span>
-                            <h2 className="mb-9 text-[28px] font-semibold text-white">
-                                $ 19.99/mo
-                            </h2>
-
-                            <div className="mb-10">
-                                <p className="mb-1 text-base font-medium leading-loose text-white">
-                                    5 User
-                                </p>
-                                <p className="mb-1 text-base font-medium leading-loose text-white">
-                                    All UI components
-                                </p>
-                                <p className="mb-1 text-base font-medium leading-loose text-white">
-                                    Lifetime access
-                                </p>
-                                <p className="mb-1 text-base font-medium leading-loose text-white">
-                                    Free updates
-                                </p>
-                                <p className="mb-1 text-base font-medium leading-loose text-white">
-                                    Use on 1 (one) project
-                                </p>
-                                <p className="mb-1 text-base font-medium leading-loose text-white">
-                                    4 Months support
-                                </p>
-                            </div>
-                            <div className="w-full">
-                                <a
-                                    href="javascript:void(0)"
-                                    className="inline-block rounded-full border border-white bg-white py-4 px-11 text-center text-base font-medium text-dark transition duration-300 ease-in-out hover:border-dark hover:bg-dark hover:text-white"
-                                >
-                                    Purchase Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="w-full md:w-1/2 lg:w-1/3">
-                        <div
-                            className="wow fadeInUp relative z-10 mb-10 overflow-hidden rounded-xl border border-primary border-opacity-20 bg-white py-10 px-8 text-center shadow-pricing sm:p-12 lg:py-10 lg:px-6 xl:p-12"
-                            data-wow-delay=".15s
-              "
-                        >
-                            <span className="mb-2 block text-base font-medium uppercase text-dark">
-                                STARTING FROM
-                            </span>
-                            <h2 className="mb-9 text-[28px] font-semibold text-primary">
-                                $ 70.99/mo
-                            </h2>
-
-                            <div className="mb-10">
-                                <p className="mb-1 text-base font-medium leading-loose text-body-color">
-                                    1 User
-                                </p>
-                                <p className="mb-1 text-base font-medium leading-loose text-body-color">
-                                    All UI components
-                                </p>
-                                <p className="mb-1 text-base font-medium leading-loose text-body-color">
-                                    Lifetime access
-                                </p>
-                                <p className="mb-1 text-base font-medium leading-loose text-body-color">
-                                    Free updates
-                                </p>
-                                <p className="mb-1 text-base font-medium leading-loose text-body-color">
-                                    Use on unlimited project
-                                </p>
-                                <p className="mb-1 text-base font-medium leading-loose text-body-color">
-                                    4 Months support
-                                </p>
-                            </div>
-                            <div className="w-full">
-                                <a
-                                    href="javascript:void(0)"
-                                    className="inline-block rounded-full border border-[#D4DEFF] bg-transparent py-4 px-11 text-center text-base font-medium text-primary transition duration-300 ease-in-out hover:border-primary hover:bg-primary hover:text-white"
-                                >
-                                    Purchase Now
-                                </a>
-                            </div>
-
-                            <span className="absolute right-0 top-0 z-[-1] block h-14 w-14 rounded-bl-full bg-secondary"></span>
-                        </div>
-                    </div>
-                </div>
+                <PricingHeader />
+                <PricingToggle
+                    billingInterval={billingInterval}
+                    setBillingInterval={setBillingInterval}
+                />
+                {billingInterval === 'custom' ? (
+                    <PricingCustomWebsite />
+                ) : (
+                    <PricingTiers />
+                )}
             </div>
         </section>
     )

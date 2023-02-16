@@ -10,14 +10,14 @@ const VisionSection = () => {
                 <div className="-mx-4 flex flex-wrap">
                     <div className="w-full px-4">
                         <div className="mb-12 lg:mb-20">
-                            <div className="flex gap-12 justify-between">
-                                <div className="w-1/3">
+                            <div className="md:flex gap-12 justify-between">
+                                <div className="w-full mb-4 md:w-1/3">
                                     <img
                                         className="w-full rounded-3xl"
                                         src="https://placekitten.com/500/600"
                                     />
                                 </div>
-                                <div className="w-2/3">
+                                <div className="w-full mb-4 md:w-2/3">
                                     <span className="mb-2 block text-lg font-semibold text-primary">
                                         Our Vision
                                     </span>

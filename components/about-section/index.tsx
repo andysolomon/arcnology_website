@@ -45,7 +45,7 @@ export default function AboutSection() {
                         <div className="w-full px-4">
                             <div className="items-center justify-between overflow-hidden border lg:flex">
                                 <div className="w-full py-12 px-7 sm:px-12 md:p-16 lg:max-w-[565px] lg:py-9 lg:px-16 xl:max-w-[640px] xl:p-[70px]">
-                                    <span className="mb-5 inline-block bg-primary py-2 px-5 text-sm font-medium text-white">
+                                    <span className="mb-5 inline-block bg-blue-800 py-2 px-5 text-sm font-medium text-white">
                                         About Us
                                     </span>
                                     <h2 className="mb-6 text-3xl font-bold text-dark sm:text-4xl sm:leading-snug 2xl:text-[40px]">
@@ -72,7 +72,7 @@ export default function AboutSection() {
                                     </p>
                                     <Link
                                         href="/about"
-                                        className="inline-flex items-center justify-center rounded bg-primary py-4 px-6 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-90 hover:shadow-lg"
+                                        className="inline-flex items-center justify-center rounded bg-blue-800 py-4 px-6 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-90 hover:shadow-lg"
                                     >
                                         Learn More
                                     </Link>
