@@ -94,10 +94,7 @@ const PricingTiers = () => {
                         <div className="flex flex-1 flex-col justify-between rounded-2xl bg-gray-50 p-6 sm:p-8">
                             <ul role="list" className="space-y-6">
                                 {tier.features.map((feature, idx) => (
-                                    <li
-                                        key={idx}
-                                        className="flex items-start"
-                                    >
+                                    <li key={idx} className="flex items-start">
                                         <div className="flex-shrink-0">
                                             <CheckIcon
                                                 className="h-6 w-6 text-indigo-600"
@@ -305,19 +302,18 @@ const PricingTable = () => {
     }
     const [features, setFeatures] = React.useState<any>([])
     React.useEffect(() => {
-        const fetchData = async () => {
-            const result = await axios.get(
-                'http://localhost:1337/api/pricing-tiers'
-            )
-            console.log("Result :: ", result.data.data)
-        }
-
-        try{
+        try {
+            const fetchData = async () => {
+                let result = await axios
+                    .get('http://localhost:1337/api/pricing-tiers')
+                    .catch(() => {
+                        console.log('Error')
+                    })
+            }
             fetchData()
-        } catch {
+        } catch (error) {
             console.log('Wow')
         }
-
     }, [])
 
     return (
