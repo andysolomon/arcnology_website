@@ -14,7 +14,7 @@ const ContactSection = () => {
                                 </span>
                                 <div className="flex items-end">
                                     <h2 className="text-[35px] font-semibold mr-12">
-                                        Let's talk about <br />
+                                        Let's talk <br />
                                         Love to hear from you!
                                     </h2>
                                     <button

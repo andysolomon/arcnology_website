@@ -34,14 +34,19 @@ const HeroSection: React.FC<IHeroProps> = ({
         >
             <div className="mx-auto max-w-7xl lg:px-8">
                 <div className="lg:grid lg:grid-cols-2 lg:gap-8">
+                    {/* Hero Text Content */}
                     <div className="mx-auto max-w-md px-6 sm:max-w-2xl sm:text-center lg:flex lg:items-center lg:px-0 lg:text-left">
                         <div className="lg:py-24">
                             <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl lg:mt-6 xl:text-6xl">
-                                <span className="block">A better way to</span>
-                                <span className="block text-sky-400">
-                                    ship web apps
+                                <span className="block">
+                                    A company built on{' '}
+                                    <span className="block text-sky-400 italic">
+                                        simple
+                                    </span>
+                                    design processes..
                                 </span>
                             </h1>
+
                             <p className="mt-3 text-base text-white sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
                                 Anim aute id magna aliqua ad ad non deserunt
                                 sunt. Qui irure qui Lorem cupidatat commodo.
@@ -49,6 +54,8 @@ const HeroSection: React.FC<IHeroProps> = ({
                             </p>
                         </div>
                     </div>
+
+                    {/* Hero Illustration */}
                     <div className="mt-12 -mb-16 sm:-mb-48 lg:relative lg:m-0">
                         <div className="mx-auto max-w-md px-6 sm:max-w-2xl lg:max-w-none lg:px-0">
                             {/* Illustration taken from Lucid Illustrations: https://lucid.pixsellz.io/ */}
