@@ -309,10 +309,12 @@ const PricingTable = () => {
                     .catch(() => {
                         console.log('Error')
                     })
+
+                console.log('Result :: ', result?.data?.data)
             }
             fetchData()
         } catch (error) {
-            console.log('Wow')
+            console.log(`Wow ${billingInterval}`)
         }
     }, [])
 

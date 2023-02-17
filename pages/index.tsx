@@ -11,6 +11,8 @@ import PricingTable from '../components/pricing-table'
 import Footer from '../components/footer'
 import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
+import { fetcher } from '../lib/api'
+import axios from 'axios'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -45,4 +47,21 @@ export default function Home() {
             <Footer />
         </>
     )
+}
+
+export const getStaticProps = async () => {
+    try {
+        const res = await fetch(
+            'https://safe-mesa-08314.herokuapp.com/api/pricing-tiers'
+        )
+        console.log('Res :: ', res)
+        //if (errors || !data) {
+        //    console.log('Errors :: ', errors)
+        //    return { notFound: true }
+        //}
+        return { props: {  } }
+    } catch (err) {
+        console.log('Catch :: ', err)
+        return { props: {} }
+    }
 }
