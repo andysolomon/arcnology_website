@@ -2,6 +2,12 @@ import * as React from 'react'
 import axios from 'axios'
 import { CheckIcon } from '@heroicons/react/24/outline'
 
+type PricingToggleProps = {
+    billingInterval: string
+    setBillingInterval: (x: any) => void
+}
+type BillingInterval = 'custom' | 'support'
+
 const features = [
     'Vitae in pulvinar odio id utobortis in inter.',
     'Sed sed id viverra viverra augue eget massa.',
@@ -124,8 +130,6 @@ const PricingTiers = () => {
     )
 }
 
-type BillingInterval = 'custom' | 'support'
-
 const PricingHeader = () => {
     return (
         <div className="px-6 lg:px-8">
@@ -146,10 +150,7 @@ const PricingHeader = () => {
     )
 }
 
-type PricingToggleProps = {
-    billingInterval: string
-    setBillingInterval: (x: any) => void
-}
+
 
 const PricingToggle: React.FC<PricingToggleProps> = ({
     billingInterval,
@@ -288,9 +289,9 @@ const PricingCustomWebsite = () => {
         </>
     )
 }
-const PricingSupportWebsite = () => {}
 
-const PricingTable = () => {
+const PricingTable = ({ content }: any) => {
+    console.log('Pricing on Pricing Table ', content)
     // Top Level State
     const [billingInterval, setBillingInterval] =
         React.useState<BillingInterval>('custom')
@@ -301,22 +302,6 @@ const PricingTable = () => {
         }
     }
     const [features, setFeatures] = React.useState<any>([])
-    React.useEffect(() => {
-        try {
-            const fetchData = async () => {
-                let result = await axios
-                    .get('http://localhost:1337/api/pricing-tiers')
-                    .catch(() => {
-                        console.log('Error')
-                    })
-
-                console.log('Result :: ', result?.data?.data)
-            }
-            fetchData()
-        } catch (error) {
-            console.log(`Wow ${billingInterval}`)
-        }
-    }, [])
 
     return (
         <section className="bg-gray-900 py-16 sm:py-24">
