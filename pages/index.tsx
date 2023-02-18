@@ -16,8 +16,11 @@ import axios from 'axios'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home({ data }: any) {
-    console.log('Pricing on Client :: ', data)
+type HomeProps = {
+    data: []
+}
+
+export const Home: React.FC<HomeProps> = ({ data }) => {
     return (
         <>
             <Head>
@@ -51,31 +54,12 @@ export default function Home({ data }: any) {
 }
 
 export const getStaticProps = async () => {
-    try {
-        console.log('Environment :: ', process.env.NEXT_PUBLIC_STRAPI_URL)
-        //const res = await fetch(
-        //    'https://safe-mesa-08314.herokuapp.com/api/pricing-tiers'
-        //)
-        const pricing = await fetch(
-            `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/pricing-tiers`
-        )
-            .then((response) => {
-                console.log('Resp :: ', response)
-                return response.json()
-            })
-            .catch((err) => {
-                console.log('Error :: ', err)
-            })
-        //console.log('Res :: ', res)
-        //if (errors || !data) {
-        //    console.log('Errors :: ', errors)
-        //    return { notFound: true }
-        //}
-        return {
-            props: pricing,
-        }
-    } catch (err) {
-        console.log('Catch :: ', err)
-        return { props: {} }
+    const { data, error } = await fetcher(
+        `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/pricing-tiers`
+    )
+    return {
+        props: { data },
     }
 }
+
+export default Home
