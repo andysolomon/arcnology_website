@@ -11,16 +11,24 @@ import PricingTable from '../components/pricing-table'
 import Footer from '../components/footer'
 import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
-import { fetcher } from '../lib/api'
+import { fetchUrls, fetchPricingUrls } from '../lib/api'
 import axios from 'axios'
 
 const inter = Inter({ subsets: ['latin'] })
 
 type HomeProps = {
     data: []
+    pricing: []
+    footer: []
+    ['home-page']: {}
 }
 
-export const Home: React.FC<HomeProps> = ({ data }) => {
+export const Home: React.FC<HomeProps> = ({
+    'home-page': homePageData,
+    pricing,
+    footer,
+}) => {
+    console.log('homePageData :: ', homePageData)
     return (
         <>
             <Head>
@@ -45,7 +53,7 @@ export const Home: React.FC<HomeProps> = ({ data }) => {
                 {/* 
                         <SocialProof />
                     */}
-                <PricingTable content={data} />
+                <PricingTable content={pricing} />
                 <ContactSection />
             </main>
             <Footer />
@@ -53,12 +61,32 @@ export const Home: React.FC<HomeProps> = ({ data }) => {
     )
 }
 
+{
+    /* Hydrate with dom data */
+}
 export const getStaticProps = async () => {
-    const { data, error } = await fetcher(
-        `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/pricing-tiers`
-    )
-    return {
-        props: { data },
+    try {
+        // Fetch URL endpoints
+        const { data, errors } = await fetchUrls([
+            `home-page`,
+            `pricing`,
+            `footer`,
+        ])
+        const { data: pricingData, errors: pricingErrors } = await fetchPricingUrls([
+            `CustomMain`,
+            `CustomSecondary`,
+            `BasicTier`,
+            `PremiumTier`,
+        ])
+
+        if (errors || !data) {
+            return { notFound: true }
+        }
+        return {
+            props: data,
+        }
+    } catch (err) {
+        return { notFound: true }
     }
 }
 
