@@ -23,12 +23,7 @@ type HomeProps = {
     ['home-page']: {}
 }
 
-export const Home: React.FC<HomeProps> = ({
-    'home-page': homePageData,
-    pricing,
-    footer,
-}) => {
-    console.log('homePageData :: ', homePageData)
+export const Home = () => {
     return (
         <>
             <Head>
@@ -53,7 +48,7 @@ export const Home: React.FC<HomeProps> = ({
                 {/* 
                         <SocialProof />
                     */}
-                <PricingTable content={pricing} />
+                <PricingTable  />
                 <ContactSection />
             </main>
             <Footer />
@@ -80,13 +75,16 @@ export const getStaticProps = async () => {
         ])
 
         if (errors || !data) {
-            return { notFound: true }
+            //return { notFound: true }
         }
         return {
-            props: data,
+            props: {}
         }
+        //return {
+            //props: data,
+        //}
     } catch (err) {
-        return { notFound: true }
+        //return { notFound: true }
     }
 }
 
