@@ -61,30 +61,28 @@ export const Home = () => {
 }
 export const getStaticProps = async () => {
     try {
-        // Fetch URL endpoints
-        const { data, errors } = await fetchUrls([
-            `home-page`,
-            `pricing`,
-            `footer`,
-        ])
+
         const { data: pricingData, errors: pricingErrors } = await fetchPricingUrls([
+            `Header`,
             `CustomMain`,
             `CustomSecondary`,
             `BasicTier`,
             `PremiumTier`,
         ])
 
-        if (errors || !data) {
-            //return { notFound: true }
+        if (pricingErrors || !pricingData) {
+            return { notFound: true }
         }
+
+        // get the values from the pricingData
+
+        console.log('More Pricing Data :: ', pricingData)
+
         return {
-            props: {}
+            props: pricingData,
         }
-        //return {
-            //props: data,
-        //}
     } catch (err) {
-        //return { notFound: true }
+        return { notFound: true }
     }
 }
 
