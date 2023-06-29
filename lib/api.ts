@@ -30,8 +30,7 @@ export const fetchPricingUrls = async (urls: string[]) => {
         }
         const data: DataFromUrl = pricingUrls.reduce(urlReducer, {} as DataFromUrl)
 
-        const { data: sexyData } = data
-        console.log('Sexy Data Object :: ', data[PRICING_HEADER_PATH].data.attributes.Header)
+        // console.log('Sexy Data Object :: ', data[PRICING_HEADER_PATH].data.attributes.Header)
 
         return { data }
     } catch (errors) {
