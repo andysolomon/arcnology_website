@@ -11,7 +11,7 @@ import PricingTable from '../components/pricing-table'
 import Footer from '../components/footer'
 import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
-import { fetchUrls, fetchPricingUrls } from '../lib/api'
+import { fetchPricingUrls } from '../lib/api'
 import axios from 'axios'
 
 const inter = Inter({ subsets: ['latin'] })
