@@ -23,7 +23,7 @@ type HomeProps = {
     ['home-page']: {}
 }
 
-export const Home = () => {
+export const Home = ({pricingData}: any) => {
     return (
         <>
             <Head>
@@ -48,7 +48,7 @@ export const Home = () => {
                 {/* 
                         <SocialProof />
                     */}
-                <PricingTable  />
+                <PricingTable content={pricingData}  />
                 <ContactSection />
             </main>
             <Footer />
@@ -74,13 +74,9 @@ export const getStaticProps = async () => {
             return { notFound: true }
         }
 
-        // get the values from the pricingData
+        const props = { pricingData }
 
-        console.log('More Pricing Data :: ', pricingData)
-
-        return {
-            props: pricingData,
-        }
+        return { props }
     } catch (err) {
         return { notFound: true }
     }

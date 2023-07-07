@@ -5,102 +5,44 @@ import { CheckIcon } from '@heroicons/react/24/outline'
 type PricingToggleProps = {
     billingInterval: string
     setBillingInterval: (x: any) => void
+    content: Object
 }
 type BillingInterval = 'custom' | 'support'
 
-const features = [
-    'Vitae in pulvinar odio id utobortis in inter.',
-    'Sed sed id viverra viverra augue eget massa.',
-    'Urna, gravida amet, a, integer venenatis.',
-    'Lobortis sed pharetra amet vitae eleifend.',
-    'Ullamcorper blandit a consequat donec elit aoreet.',
-    'Dolor quo assumenda.',
-    'Esse rerum distinctio maiores maiores.',
-    'Eos enim officiis ratione.',
-    'Tempore molestiae aliquid excepturi.',
-    'Perspiciatis eveniet inventore eum et aliquam.',
-]
 
-const hobbyFeatures = [
-    'Pariatur quod similique',
-    'Sapiente libero doloribus',
-    'Vel ipsa esse repudiandae',
-]
-const growthFeatures = [
-    'Quia rem est sed impedit magnam',
-    'Dolorem vero ratione voluptates',
-    'Qui sed ab doloribus voluptatem dolore',
-    'Laborum commodi molestiae id et fugiat',
-    'Nam ut ipsa nesciunt culpa modi dolor',
-]
-const scaleFeatures = [
-    'Pariatur quod similique',
-    'Sapiente libero doloribus',
-    'Vel ipsa esse repudiandae',
-]
+const PricingTiers = (props: any) => {
+    const { basicContent, premiumContent } = props
+    const tiersList = [basicContent, premiumContent]
 
-const tiers = [
-    {
-        id: 'tier-hobby',
-        name: 'Hobby',
-        href: '#',
-        priceMonthly: 49,
-        description:
-            'Lorem ipsum dolor sit amet consect etur adipisicing elit. Itaque amet indis perferendis.',
-        features: [
-            'Pariatur quod similique',
-            'Sapiente libero doloribus modi nostrum',
-            'Vel ipsa esse repudiandae excepturi',
-            'Itaque cupiditate adipisci quibusdam',
-        ],
-    },
-    {
-        id: 'tier-team',
-        name: 'Team',
-        href: '#',
-        priceMonthly: 79,
-        description:
-            'Lorem ipsum dolor sit amet consect etur adipisicing elit. Itaque amet indis perferendis.',
-        features: [
-            'Pariatur quod similique',
-            'Sapiente libero doloribus modi nostrum',
-            'Vel ipsa esse repudiandae excepturi',
-            'Itaque cupiditate adipisci quibusdam',
-            'Sapiente libero doloribus modi nostrum',
-        ],
-    },
-]
-
-const PricingTiers = () => {
     return (
         <div className="mx-auto grid max-w-md grid-cols-1 gap-8 lg:max-w-4xl lg:grid-cols-2 lg:gap-8">
-            {tiers.map((tier) => (
+            {tiersList.map((tier) => (
                 <div
-                    key={tier.name}
+                    key={tier.id}
                     className="flex flex-col rounded-3xl bg-white shadow-xl ring-1 ring-black/10"
                 >
                     <div className="p-8 sm:p-10">
                         <h3
                             className="text-lg font-semibold leading-8 tracking-tight text-indigo-600"
-                            id={tier.id}
+                            id={tier.Header}
                         >
-                            {tier.name}
+                            {tier.Header}
                         </h3>
                         <div className="mt-4 flex items-baseline text-5xl font-bold tracking-tight text-gray-900">
-                            ${tier.priceMonthly}
+                            ${tier.Pricing}
                             <span className="text-lg font-semibold leading-8 tracking-normal text-gray-500">
                                 /mo
                             </span>
                         </div>
                         <p className="mt-6 text-base leading-7 text-gray-600">
-                            {tier.description}
+                            {tier.Description}
                         </p>
                     </div>
                     <div className="flex flex-1 flex-col p-2">
                         <div className="flex flex-1 flex-col justify-between rounded-2xl bg-gray-50 p-6 sm:p-8">
                             <ul role="list" className="space-y-6">
-                                {tier.features.map((feature, idx) => (
-                                    <li key={idx} className="flex items-start">
+                                {tier.Services.map((feature, idx) => (
+                                    <li key={feature.id} className="flex items-start">
                                         <div className="flex-shrink-0">
                                             <CheckIcon
                                                 className="h-6 w-6 text-indigo-600"
@@ -108,7 +50,7 @@ const PricingTiers = () => {
                                             />
                                         </div>
                                         <p className="ml-3 text-sm leading-6 text-gray-600">
-                                            {feature}
+                                            {feature.Service}
                                         </p>
                                     </li>
                                 ))}
@@ -119,7 +61,7 @@ const PricingTiers = () => {
                                     className="inline-block w-full rounded-lg bg-indigo-600 px-4 py-2.5 text-center text-sm font-semibold leading-5 text-white shadow-md hover:bg-indigo-700"
                                     aria-describedby={tier.id}
                                 >
-                                    Get started today
+                                    {tier.Button.Label}
                                 </a>
                             </div>
                         </div>
@@ -130,20 +72,20 @@ const PricingTiers = () => {
     )
 }
 
-const PricingHeader = () => {
+const PricingHeader = ( props: any ) => {
+    const { pricingHeaderContent: content } = props
+
     return (
         <div className="px-6 lg:px-8">
             <div className="text-center">
                 <h2 className="text-xl font-semibold leading-6 text-white">
-                    Pricing
+                    {props.content.Title}
                 </h2>
                 <p className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
-                    The right price for you, whoever you are
+                    {props.content.Subtitle}
                 </p>
                 <p className="mx-auto mt-3 max-w-4xl text-xl text-white sm:mt-5 sm:text-2xl">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Velit numquam eligendi quos odit doloribus molestiae
-                    voluptatum.
+                    {props.content.Description}
                 </p>
             </div>
         </div>
@@ -156,6 +98,7 @@ const PricingToggle: React.FC<PricingToggleProps> = ({
     billingInterval,
     setBillingInterval,
 }) => {
+
     return (
         <div className="relative mt-12 flex justify-center sm:mt-16 mb-8">
             <div className="flex rounded-lg bg-blue-800 p-0.5">
@@ -187,49 +130,48 @@ const PricingToggle: React.FC<PricingToggleProps> = ({
         </div>
     )
 }
-const PricingCustomWebsite = () => {
+const PricingCustomWebsite = (props: any) => {
+    const { pricingCustomMain, pricingCustomSecondary } = props
+
     return (
         <>
             <div className="pb-16 mt-12 xl:flex xl:items-center xl:justify-between">
                 <div>
                     <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
                         <span className="text-white">
-                            Everything you need for &nbsp;
+                            {props.mainContent.Title}
                         </span>
-                        <span className="text-blue-800">$99 a month</span>
+                        <span className="text-blue-800"></span>
                     </h1>
                     <p className="mt-5 text-xl text-white">
-                        Includes every feature we offer plus unlimited projects
-                        and unlimited users.
+                        {props.mainContent.Description}
                     </p>
                 </div>
                 <a
                     href="#"
                     className="mt-8 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-5 py-3 text-base font-medium text-white hover:bg-indigo-700 sm:mt-10 sm:w-auto xl:mt-0"
                 >
-                    Get started today
+                    {props.mainContent.Button.Label}
                 </a>
             </div>
             <div className="border-t border-gray-200 pt-16 xl:grid xl:grid-cols-3 xl:gap-x-8">
                 <div>
                     <h2 className="text-lg font-semibold text-white">
-                        Everything you need
+                        {props.secondaryContent.Title}
                     </h2>
                     <p className="mt-2 text-3xl font-bold tracking-tight text-white">
-                        All-in-one platform
+                        {props.secondaryContent.Subtitle}
                     </p>
                     <p className="mt-4 text-lg text-white">
-                        Ac euismod vel sit maecenas id pellentesque eu sed
-                        consectetur. Malesuada adipiscing sagittis vel nulla
-                        nec. Urna, sed a lectus elementum blandit et.
+                        {props.secondaryContent.Description}
                     </p>
                 </div>
                 <div className="mt-4 sm:mt-8 md:mt-10 md:grid md:grid-cols-2 md:gap-x-8 xl:col-span-2 xl:mt-0">
                     <ul role="list" className="divide-y divide-gray-200">
-                        {features.slice(0, 5).map((feature, featureIdx) =>
+                        {props.secondaryContent.Services.slice(0, 5).map((feature, featureIdx) =>
                             featureIdx === 0 ? (
                                 <li
-                                    key={feature}
+                                    key={feature.id}
                                     className="flex py-4 md:py-0 md:pb-4"
                                 >
                                     <CheckIcon
@@ -237,17 +179,17 @@ const PricingCustomWebsite = () => {
                                         aria-hidden="true"
                                     />
                                     <span className="ml-3 text-base text-white">
-                                        {feature}
+                                        {feature.Service}
                                     </span>
                                 </li>
                             ) : (
-                                <li key={feature} className="flex py-4">
+                                <li key={feature.id} className="flex py-4">
                                     <CheckIcon
                                         className="h-6 w-6 flex-shrink-0 text-green-500"
                                         aria-hidden="true"
                                     />
                                     <span className="ml-3 text-base text-white">
-                                        {feature}
+                                        {feature.Service}
                                     </span>
                                 </li>
                             )
@@ -257,10 +199,10 @@ const PricingCustomWebsite = () => {
                         role="list"
                         className="divide-y divide-gray-200 border-t border-gray-200 md:border-t-0"
                     >
-                        {features.slice(5).map((feature, featureIdx) =>
+                        {props.secondaryContent.Services.slice(5).map((feature, featureIdx) =>
                             featureIdx === 0 ? (
                                 <li
-                                    key={feature}
+                                    key={feature.id}
                                     className="flex py-4 md:border-t-0 md:py-0 md:pb-4"
                                 >
                                     <CheckIcon
@@ -268,17 +210,17 @@ const PricingCustomWebsite = () => {
                                         aria-hidden="true"
                                     />
                                     <span className="ml-3 text-base text-white">
-                                        {feature}
+                                        {feature.Service}
                                     </span>
                                 </li>
                             ) : (
-                                <li key={feature} className="flex py-4">
+                                <li key={feature.id} className="flex py-4">
                                     <CheckIcon
                                         className="h-6 w-6 flex-shrink-0 text-green-500"
                                         aria-hidden="true"
                                     />
                                     <span className="ml-3 text-base text-white">
-                                        {feature}
+                                        {feature.Service}
                                     </span>
                                 </li>
                             )
@@ -291,7 +233,6 @@ const PricingCustomWebsite = () => {
 }
 
 const PricingTable = ({ content }: any) => {
-    console.log('Pricing on Pricing Table ', content)
     // Top Level State
     const [billingInterval, setBillingInterval] =
         React.useState<BillingInterval>('custom')
@@ -303,18 +244,25 @@ const PricingTable = ({ content }: any) => {
     }
     const [features, setFeatures] = React.useState<any>([])
 
+    const pricingHeaderContent = content.Header.data.attributes.Header
+    const pricingCustomMainContent = content.CustomMain.data.attributes.CustomMain
+    const pricingCustomSecondaryContent = content.CustomSecondary.data.attributes.CustomSecondary
+    const pricingBasicContent = content.BasicTier.data.attributes.BasicTier
+    const pricingPremiumContent = content.PremiumTier.data.attributes.PremiumTier
+
     return (
         <section className="bg-gray-900 py-16 sm:py-24">
             <div className="container">
-                <PricingHeader />
+                <PricingHeader content={pricingHeaderContent} />
                 <PricingToggle
                     billingInterval={billingInterval}
                     setBillingInterval={setBillingInterval}
+                    content={{}}
                 />
                 {billingInterval === 'custom' ? (
-                    <PricingCustomWebsite />
+                    <PricingCustomWebsite mainContent={pricingCustomMainContent} secondaryContent={pricingCustomSecondaryContent} />
                 ) : (
-                    <PricingTiers />
+                    <PricingTiers basicContent={pricingBasicContent} premiumContent={pricingPremiumContent}  />
                 )}
             </div>
         </section>

@@ -5,6 +5,14 @@ type DataFromUrl = {
 }
 
 const STRAPI_PATH = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api`
+const extractKeyFromUrl = (url: string) => {
+  // Example: "https://example.com/api/pricing?populate[BasicTier][populate]=*"
+  // Extract the substring between "[BasicTier]" and the previous "/"
+  const match = url.match(/\[(.*?)\]/);
+  const key = match ? match[1] : "";
+
+  return key;
+};
 
 export const fetchPricingUrls = async (urls: string[]) => {
     const PRICING_HEADER_PATH = `${STRAPI_PATH}/pricing?populate[Header][populate]=*`
@@ -23,14 +31,13 @@ export const fetchPricingUrls = async (urls: string[]) => {
         const results = await Promise.all(fetchRequests)
 
         const urlReducer = (acc: any, url: string, index: number) => {
+            const key = extractKeyFromUrl(url);
             return {
                 ...acc,
-                [url]: results[index],
+                [key]: results[index],
             }
         }
         const data: DataFromUrl = pricingUrls.reduce(urlReducer, {} as DataFromUrl)
-
-        // console.log('Sexy Data Object :: ', data[PRICING_HEADER_PATH].data.attributes.Header)
 
         return { data }
     } catch (errors) {
