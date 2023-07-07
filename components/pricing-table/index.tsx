@@ -41,7 +41,7 @@ const PricingTiers = (props: any) => {
                     <div className="flex flex-1 flex-col p-2">
                         <div className="flex flex-1 flex-col justify-between rounded-2xl bg-gray-50 p-6 sm:p-8">
                             <ul role="list" className="space-y-6">
-                                {tier.Services.map((feature, idx) => (
+                                {tier.Services.map((feature: any, idx: Number) => (
                                     <li key={feature.id} className="flex items-start">
                                         <div className="flex-shrink-0">
                                             <CheckIcon
@@ -168,7 +168,7 @@ const PricingCustomWebsite = (props: any) => {
                 </div>
                 <div className="mt-4 sm:mt-8 md:mt-10 md:grid md:grid-cols-2 md:gap-x-8 xl:col-span-2 xl:mt-0">
                     <ul role="list" className="divide-y divide-gray-200">
-                        {props.secondaryContent.Services.slice(0, 5).map((feature, featureIdx) =>
+                        {props.secondaryContent.Services.slice(0, 5).map((feature: any, featureIdx: Number) =>
                             featureIdx === 0 ? (
                                 <li
                                     key={feature.id}
@@ -199,7 +199,7 @@ const PricingCustomWebsite = (props: any) => {
                         role="list"
                         className="divide-y divide-gray-200 border-t border-gray-200 md:border-t-0"
                     >
-                        {props.secondaryContent.Services.slice(5).map((feature, featureIdx) =>
+                        {props.secondaryContent.Services.slice(5).map((feature: any, featureIdx: Number) =>
                             featureIdx === 0 ? (
                                 <li
                                     key={feature.id}
